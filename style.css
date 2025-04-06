@@ -1,0 +1,242 @@
+/* CSS Variables */
+:root {
+    --main-green: #1e3000; --orange: #ee7a13; --text-yellow: #fffadd;
+    --outline-grey: #f4f1eb; --event-bg: #a7a49a;
+    --font-main: 'Open Sans', sans-serif; --font-heading: 'Lora', serif;
+    --transition-duration: 0.6s; /* Page transition */
+    --transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+    --modal-transition-duration: 0.4s; /* Modal fade */
+    --modal-transition-timing: ease-in-out;
+}
+
+/* Global Reset & Base Styles (Mobile First) */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+    font-family: var(--font-main); background-color: var(--main-green); color: var(--text-yellow);
+    line-height: 1.6; position: relative; overflow-x: hidden;
+    overflow-y: scroll; font-size: 16px;
+}
+.hidden {
+    opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; display: none !important;
+}
+
+/* General Logo Placeholder / Text */
+.logo-placeholder { text-align: center; }
+.logo-text { font-family: var(--font-heading); font-weight: bold; color: var(--outline-grey); }
+.logo-placeholder .logo-image { max-width: 100px; height: auto; vertical-align: middle; }
+
+/* General Page Transition Styles (Applied to signup page) */
+.page {
+    min-height: 100vh; background-color: var(--main-green); color: var(--text-yellow); padding: 20px;
+    display: flex; flex-direction: column; align-items: center; position: relative; box-sizing: border-box;
+    padding-top: 80px; padding-bottom: 60px;
+}
+.page:not(.hidden) {
+    opacity: 0; visibility: hidden; transform: translateY(30px);
+    transition: opacity var(--transition-duration) var(--transition-timing),
+                transform var(--transition-duration) var(--transition-timing);
+    display: flex !important;
+}
+.page.slide-in { opacity: 1; visibility: visible; transform: translateY(0); }
+.page .logo-placeholder { position: absolute; top: 25px; left: 50%; transform: translateX(-50%); margin-bottom: 0; }
+.page .logo-placeholder .logo-image { max-width: 80px; }
+.page .back-btn {
+    position: absolute; top: 25px; right: 20px; z-index: 50; border-radius: 8px;
+    padding: 5px 15px; font-size: 0.85rem; color: var(--outline-grey);
+    border: 1px solid var(--outline-grey); background-color: transparent;
+    font-family: var(--font-main); text-transform: lowercase; cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.page .back-btn:hover { background-color: rgba(244, 241, 235, 0.1); color: var(--outline-grey); }
+.page .content-wrapper { max-width: 100%; width: 100%; margin-top: 40px; text-align: center; font-family: var(--font-heading); }
+
+/* ========== LANDING PAGE STYLES (Mobile First) ========== */
+#landing {
+    min-height: 100vh; position: relative; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; text-align: center;
+    padding: 20px 15px;
+    background-image: url('images/landing-bg.jpeg.jpeg');
+    background-size: cover; background-position: center center; background-repeat: no-repeat;
+    z-index: 10; opacity: 1; visibility: visible; transform: translateY(0);
+    transition: opacity var(--transition-duration) var(--transition-timing),
+                 transform var(--transition-duration) var(--transition-timing);
+}
+#landing.hidden {
+    opacity: 0 !important; visibility: hidden !important; transform: translateY(-20px);
+    pointer-events: none !important; display: none !important;
+}
+#landing .overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: var(--main-green); opacity: 0.88; z-index: 1; }
+#landing .content { position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; width: 100%; max-width: 600px; margin-top: 0; padding: 20px 0; }
+#landing .logo-placeholder { margin-bottom: 30px; transform: translateY(0); }
+#landing .logo-placeholder .logo-image { max-width: 120px; }
+#landing .join-club-text { font-style: italic; font-size: 1.1rem; margin-bottom: 15px; color: var(--text-yellow); }
+#landing .main-signup-btn {
+    font-family: var(--font-heading); font-size: 1.6rem; font-weight: 500; color: var(--text-yellow);
+    background-color: transparent; border: 1.5px solid var(--outline-grey); border-radius: 8px;
+    padding: 10px 15px;
+    margin-bottom: 8px; /* MOVED UP: Further reduced bottom margin */
+    cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; justify-content: space-between;
+    width: 90%; max-width: 400px; transition: background-color 0.3s ease, color 0.3s ease; text-transform: uppercase;
+}
+#landing .main-signup-btn span:first-child { flex-grow: 1; text-align: center; padding-left: 15px; }
+#landing .main-signup-btn .arrow { font-size: 1.6rem; line-height: 1; margin-left: 10px; text-align: right; }
+#landing .main-signup-btn:hover { background-color: rgba(244, 241, 235, 0.1); }
+#landing .actions {
+    display: flex; gap: 10px; align-items: center; justify-content: center;
+    margin-top: 5px; /* MOVED UP: Kept small top margin */
+    flex-wrap: wrap;
+}
+#landing .actions button:not(.icon-link) {
+    font-family: var(--font-main); font-size: 0.9rem; color: var(--text-yellow); background-color: transparent;
+    border: 1px solid var(--outline-grey); border-radius: 6px; padding: 8px 18px; cursor: pointer;
+    text-decoration: none; transition: background-color 0.3s ease, color 0.3s ease; white-space: nowrap;
+}
+#landing .actions .icon-link {
+    background-color: transparent; border: 1.5px solid var(--orange); border-radius: 6px;
+    width: 40px; height: 40px; padding: 0; cursor: pointer; text-decoration: none;
+    display: flex; align-items: center; justify-content: center; transition: background-color 0.3s ease;
+}
+#landing .actions .icon-link svg { fill: var(--text-yellow); width: 18px; height: 18px; transition: fill 0.3s ease; }
+#landing .actions button:not(.icon-link):hover, #landing .actions .icon-link:hover { background-color: rgba(244, 241, 235, 0.1); }
+
+/* ========== PAST EVENTS STYLES (Mobile First) ========== */
+/* Using #upcoming-events ID for consistency if JS relies on it, but styles apply to Past Events */
+#upcoming-events {
+    position: relative; z-index: 5; background-color: var(--main-green); padding: 50px 15px 60px 15px;
+    box-sizing: border-box; width: 100%; text-align: center; opacity: 1; visibility: visible;
+    transition: opacity var(--transition-duration) var(--transition-timing);
+}
+#upcoming-events.hidden {
+    opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; display: none !important;
+}
+.logo-placeholder.upcoming-logo { display: none; }
+#upcoming-events h2 { font-family: var(--font-main); font-size: 1.3rem; text-transform: lowercase; letter-spacing: 1px; margin-bottom: 40px; color: var(--text-yellow); font-weight: normal; text-align: center; }
+.events-grid { display: grid; grid-template-columns: 1fr; gap: 25px; max-width: 500px; margin: 0 auto 50px auto; text-align: left; }
+.event-item { display: flex; flex-direction: column; background-color: var(--main-green); overflow: hidden; }
+.event-image-placeholder { width: 100%; height: 250px; background-color: #555; display: flex; justify-content: center; align-items: center; overflow: hidden; }
+.event-image-placeholder img { width: 100%; height: 100%; object-fit: cover; }
+.event-description { width: 100%; background-color: var(--event-bg); padding: 20px 25px; color: var(--main-green); font-family: var(--font-main); font-size: 0.9rem; line-height: 1.6; display: flex; flex-direction: column; justify-content: center; height: auto; }
+.event-description p { margin-bottom: 5px; color: var(--main-green); font-family: var(--font-main); }
+.event-description p:last-child { margin-bottom: 0; }
+.event-description strong { font-weight: 700; color: var(--main-green); font-family: var(--font-main); }
+.bottom-signup-btn {
+    font-family: var(--font-main); font-size: 0.9rem; color: var(--text-yellow); background-color: transparent;
+    border: 1.5px solid var(--outline-grey); border-radius: 8px; padding: 10px 30px; cursor: pointer;
+    text-decoration: none; transition: background-color 0.3s ease, color 0.3s ease; display: inline-block;
+    margin-top: 0; text-transform: uppercase;
+}
+.bottom-signup-btn:hover { background-color: rgba(244, 241, 235, 0.1); color: var(--text-yellow); }
+
+/* ========== SIGNUP PAGE STYLES (Mobile First) ========== */
+#signup-page h2 { font-family: var(--font-heading); font-size: 1.7rem; font-style: italic; font-weight: 500; margin-bottom: 30px; color: var(--outline-grey); }
+#signup-page p, #signup-page .list-group, #signup-page .form-link { font-family: var(--font-heading); font-size: 1.05rem; line-height: 1.7; color: var(--text-yellow); margin-bottom: 30px; }
+#signup-page p:last-child { margin-bottom: 0; }
+#signup-page .list-group div { margin-bottom: 6px; }
+.highlight-signup { color: var(--orange); font-weight: 700; }
+#signup-page .form-link { color: var(--text-yellow); text-decoration: underline; transition: color 0.3s ease; display: inline-block; margin-bottom: 0; }
+#signup-page .form-link:hover { color: var(--outline-grey); }
+.animate-line { opacity: 0; transform: translateY(20px); transition: opacity 0.8s var(--transition-timing), transform 0.8s var(--transition-timing); }
+.animate-line.visible { opacity: 1; transform: translateY(0); }
+
+/* ========== MODAL STYLES (Robust Version) ========== */
+.modal {
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 1000;
+    display: flex; justify-content: center; align-items: center;
+    padding: 15px; box-sizing: border-box;
+    background-color: rgba(30, 48, 0, 0.92);
+    opacity: 0; visibility: hidden; pointer-events: none;
+    transition: opacity var(--modal-transition-duration) var(--modal-transition-timing),
+                visibility 0s var(--modal-transition-duration);
+}
+.modal.visible {
+    opacity: 1; visibility: visible; pointer-events: auto;
+    transition: opacity var(--modal-transition-duration) var(--modal-transition-timing),
+                visibility 0s 0s;
+}
+.modal-content {
+    background-color: var(--main-green); color: var(--text-yellow);
+    padding: 30px 25px; border-radius: 8px; max-width: 500px; width: 95%;
+    position: relative; z-index: 1001; text-align: left;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+.modal-back-btn {
+    position: absolute; top: 10px; right: 10px; z-index: 1002;
+    border-radius: 25px; padding: 5px 15px; font-size: 0.8rem; color: var(--outline-grey);
+    border: 1px solid var(--outline-grey); font-family: var(--font-main);
+    text-transform: lowercase; background: transparent; cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.modal-back-btn:hover { background-color: rgba(244, 241, 235, 0.1); color: var(--outline-grey); }
+
+/* --- About Us Modal Specifics --- */
+#about-us-modal .modal-content { /* Keep specific class if needed */ }
+#about-us-modal .modal-content h2 { font-family: var(--font-heading); font-size: 1.7rem; margin-bottom: 25px; text-align: center; font-weight: 500; color: var(--text-yellow); }
+#about-us-modal .modal-content h2 em { font-style: italic; font-weight: inherit; }
+#about-us-modal p.animate-paragraph { font-family: var(--font-heading); font-size: 1rem; line-height: 1.7; margin-bottom: 1.5em; color: var(--text-yellow); opacity: 0; transform: translateY(10px); transition: opacity 0.6s ease-out, transform 0.5s ease-out; }
+#about-us-modal p.animate-paragraph br { display: block; content: ""; margin-top: 0.3em; }
+#about-us-modal p.animate-paragraph:last-child { margin-bottom: 0; }
+#about-us-modal p.animate-paragraph.visible { opacity: 1; transform: translateY(0); }
+#about-us-modal .highlight-living, #about-us-modal .highlight-you { color: var(--orange); font-weight: bold; }
+
+/* --- Contact Modal Specifics --- */
+#contact-modal .modal-content { text-align: center; padding-top: 45px; padding-bottom: 35px; }
+#contact-modal h2 { font-family: var(--font-heading); font-size: 1.6rem; font-weight: 500; margin-bottom: 25px; color: var(--text-yellow); text-transform: lowercase; }
+#contact-modal .email-info { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 10px; }
+#contact-modal .email-icon { width: 22px; height: 22px; fill: var(--text-yellow); }
+#contact-modal .email-link { font-family: var(--font-heading); font-size: 1rem; color: var(--text-yellow); text-decoration: none; border-bottom: 1px solid transparent; transition: color 0.3s ease, border-color 0.3s ease; word-break: break-all; }
+#contact-modal .email-link:hover { color: var(--outline-grey); border-bottom-color: var(--outline-grey); }
+
+/* ========== DESKTOP OVERRIDES (min-width: 768px) ========== */
+@media (min-width: 768px) {
+    body { font-size: 17px; }
+    .logo-placeholder .logo-image { max-width: 130px; }
+
+    .page { padding: 100px 40px 100px 40px; }
+    .page .logo-placeholder { top: 35px; }
+    .page .logo-placeholder .logo-image { max-width: 100px; }
+    .page .back-btn { top: 35px; right: 25px; padding: 6px 20px; font-size: 0.9rem; }
+    .page .content-wrapper { max-width: 650px; margin-top: 50px; }
+
+    #landing { padding: 20px; }
+    #landing .logo-placeholder .logo-image { max-width: 130px; }
+    #landing .main-signup-btn {
+        width: 400px; font-size: 2.2rem; padding: 12px 25px;
+        margin-bottom: 8px; /* MOVED UP: Keep reduced margin */
+    }
+    #landing .main-signup-btn span:first-child { padding-left: 25px; }
+    #landing .main-signup-btn .arrow { font-size: 2rem; margin-left: 15px; }
+    #landing .actions {
+        gap: 12px; flex-wrap: nowrap;
+        margin-top: 8px; /* MOVED UP: Slightly increased margin from mobile */
+    }
+    #landing .actions button:not(.icon-link) { font-size: 0.95rem; padding: 8px 22px; }
+    #landing .actions .icon-link { width: 44px; height: 44px; }
+    #landing .actions .icon-link svg { width: 20px; height: 20px; }
+
+    #upcoming-events { padding: 60px 20px 80px 20px; }
+    #upcoming-events h2 { font-size: 1.5rem; margin-bottom: 50px; }
+    .events-grid { max-width: 800px; gap: 30px; margin-bottom: 60px; }
+    .event-item { flex-direction: row; align-items: stretch; height: 300px; }
+    .event-image-placeholder { width: 45%; height: 100%; }
+    .event-description { width: 55%; height: 100%; padding: 25px 30px; font-size: 0.95rem; }
+    .bottom-signup-btn { font-size: 1rem; padding: 10px 35px; }
+
+    #signup-page h2 { font-size: 2rem; margin-bottom: 40px; }
+    #signup-page p, #signup-page .list-group, #signup-page .form-link { font-size: 1.15rem; margin-bottom: 40px; }
+    #signup-page p:last-child { margin-bottom: 0; }
+
+    /* Desktop Modal Styles */
+    .modal { padding: 20px; }
+    .modal-content { padding: 40px 50px; max-width: 650px; width: auto; }
+    .modal-back-btn { top: 15px; right: 15px; padding: 6px 20px; font-size: 0.85rem; }
+    /* Desktop About Modal */
+    #about-us-modal .modal-content h2 { font-size: 2rem; margin-bottom: 35px; }
+    #about-us-modal p.animate-paragraph { font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.8em; }
+    /* Desktop Contact Modal */
+    #contact-modal .modal-content { padding: 50px 60px; }
+    #contact-modal h2 { font-size: 1.8rem; margin-bottom: 30px; }
+    #contact-modal .email-icon { width: 24px; height: 24px; }
+    #contact-modal .email-link { font-size: 1.15rem; }
+
+} /* End of @media (min-width: 768px) */
